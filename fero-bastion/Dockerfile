@@ -9,8 +9,10 @@ RUN apt-get update && \
         cmake \
         golang-go \
         libsqlite3-dev \
+        musl-tools \
         unzip && \
-    unzip -d /usr /tmp/protoc.zip
+    unzip -d /usr /tmp/protoc.zip && \
+    rustup target add x86_64-unknown-linux-musl
 
 WORKDIR /usr/src/fero
 COPY ./Cargo.lock ./Cargo.lock
@@ -19,10 +21,11 @@ COPY ./fero-client/ ./fero-client/
 COPY ./fero-bastion/ ./fero-bastion/
 COPY ./fero-proto/ ./fero-proto/
 COPY ./fero-server/ ./fero-server/
-RUN cargo build --release --package fero-bastion
+RUN cargo build --target=x86_64-unknown-linux-musl --release --package fero-bastion && \
+    strip target/x86_64-unknown-linux-musl/release/fero-bastion
 
-FROM debian:stretch-slim
+FROM scratch
 WORKDIR /opt/fero-bastion/bin
 EXPOSE 50051
 ENTRYPOINT ["./fero-bastion"]
-COPY --from=build /usr/src/fero/target/release/fero-bastion .
+COPY --from=build /usr/src/fero/target/x86_64-unknown-linux-musl/release/fero-bastion .

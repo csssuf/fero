@@ -8,10 +8,10 @@ workspace = ".."
 chrono = "0.4"
 failure = "0.1"
 futures = "0.1"
-grpcio = "0.2"
+grpcio = { git = "https://github.com/pingcap/grpc-rs" }
 log = "0.4"
 loggerv = "0.7"
-protobuf = "1.4"
+protobuf = "2.0"
 structopt = "0.2"
 
 [dependencies.fero-proto]

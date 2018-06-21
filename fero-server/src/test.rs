@@ -9,7 +9,7 @@ use gpgme::{Context, CreateKeyFlags, ExportMode, Protocol};
 use libyubihsm::{ReturnCode, Yubihsm};
 use num::BigUint;
 use pretty_good::Packet;
-use protobuf::repeated::RepeatedField;
+use protobuf::RepeatedField;
 use secstr::SecStr;
 use tempfile::{NamedTempFile, TempDir};
 

@@ -18,7 +18,7 @@ use std::sync::Arc;
 use byteorder::{BigEndian, WriteBytesExt};
 use failure::Error;
 use grpcio::{ChannelBuilder, EnvBuilder};
-use protobuf::repeated::RepeatedField;
+use protobuf::RepeatedField;
 use structopt::StructOpt;
 
 use fero_proto::fero::{Identification, LogRequest, SignRequest, SignRequest_SignatureType,

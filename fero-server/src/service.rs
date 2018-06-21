@@ -6,7 +6,7 @@ use failure::Error;
 use futures::Future;
 use grpcio::{self, RpcContext, RpcStatus, UnarySink};
 use pretty_good::{HashAlgorithm, Packet};
-use protobuf::{Message, repeated::RepeatedField, well_known_types::Timestamp};
+use protobuf::{Message, RepeatedField, well_known_types::Timestamp};
 
 use database::Configuration;
 use fero_proto::fero::*;

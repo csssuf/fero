@@ -13,6 +13,7 @@
 
 extern crate grpcio_compiler;
 extern crate protobuf;
+extern crate protobuf_codegen;
 
 use std::fs::{self, File};
 use std::env;
@@ -21,9 +22,9 @@ use std::path::Path;
 use std::process::{Command, Output};
 
 use grpcio_compiler::codegen as grpc_gen;
-use protobuf::codegen as pb_gen;
 use protobuf::compiler_plugin::GenResult;
 use protobuf::descriptor::{FileDescriptorProto, FileDescriptorSet};
+use protobuf_codegen as pb_gen;
 
 fn run_command(cmd: &mut Command) -> Output {
     match cmd.output() {
@@ -92,7 +93,12 @@ fn compile(protos: &[&str], module: &str) {
 
     let mod_rs = module_path.join("mod.rs");
     let mut module = File::create(mod_rs).unwrap();
-    desc_to_module(&desc_path, &module_path, pb_gen::gen, &mut module);
+    desc_to_module(
+        &desc_path,
+        &module_path,
+        |fdp, f| pb_gen::gen(fdp, f, &pb_gen::Customize::default()),
+        &mut module
+    );
     desc_to_module(&desc_path, &module_path, grpc_gen::gen, &mut module);
 }
 

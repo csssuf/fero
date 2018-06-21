@@ -11,12 +11,13 @@ diesel = { version = "1", features = ["sqlite", "chrono"] }
 diesel-derive-enum = { version = "0.4", features = ["sqlite"] }
 failure = "0.1"
 futures = "0.1"
-grpcio = "0.2"
-protobuf = "1.4"
+grpcio = { git = "https://github.com/pingcap/grpc-rs" }
+protobuf = "2.0"
 sha2 = "0.7"
 
 [build-dependencies]
-grpcio-compiler = "0.2"
+grpcio-compiler = { git = "https://github.com/pingcap/grpc-rs" }
 tempdir = "0.3"
-protobuf = "1.4"
-protoc = "1.4"
+protobuf = "2.0"
+protobuf-codegen = "2.0"
+protoc = "2.0"

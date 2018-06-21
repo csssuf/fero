@@ -2,3 +2,5 @@
 .git
 .gitignore
 **/target
+**/Dockerfile
+**/Dockerfile.*
